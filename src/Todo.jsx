@@ -32,7 +32,7 @@ const Todo = () => {
             ? list.map((todo, i) => (
                 <ListItem
                   key={i}
-                  id={i}
+                  id={todo.id}
                   addListItem={addListItem}
                   removeListItem={removeListItem}
                   value={todo.value}
