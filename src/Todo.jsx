@@ -5,7 +5,7 @@ const Todo = () => {
   const [list, setList] = useState([{ id: 0, value: "" }]);
 
   const addListItem = (id) => {
-    const listArr = [...list, { id: id, value: "" }];
+    const listArr = [...list, { id: id + 1, value: "" }];
     console.log(listArr);
     setList(listArr);
   };
@@ -17,16 +17,26 @@ const Todo = () => {
     }
   };
 
+  const setValue = (id, value) => {
+    const newList = list.map((todo) =>
+      todo.id === id ? { ...todo, value } : todo
+    );
+    setList(newList);
+  };
+
   return (
     <div className="todo">
       <form onSubmit={(e) => e.preventDefault()}>
         <ul>
           {list.length
-            ? list.map((l, i) => (
+            ? list.map((todo, i) => (
                 <ListItem
                   key={i}
+                  id={i}
                   addListItem={addListItem}
                   removeListItem={removeListItem}
+                  value={todo.value}
+                  onChange={setValue}
                 />
               ))
             : ""}
